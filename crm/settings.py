@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Local Apps
-    'accounts',
+    'accounts.apps.AccountsConfig',
+
+    # 3rd Party Apps
     'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +82,12 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbCRM',
+        "USER": "JohanTech",
+        "PASSWORD": "Parad1sesurvive",
+        "HOST": "database-1.civmbefeytuf.eu-west-2.rds.amazonaws.com",
+        "PORT": 5432,
     }
 }
 
@@ -131,3 +138,12 @@ STATICFILES_FINDERS = [
 
 MEDIA_ROOT = str(BASE_DIR.joinpath('media/profile_pics'))
 MEDIA_URL = "/media/"
+
+# AWS Set Up
+# AWS_ACCESS_KEY_ID = 'AKIAXKPL22RZ6SIGWJXO'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'orderco-crm'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

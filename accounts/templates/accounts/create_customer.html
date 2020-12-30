@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-warning" href="{% url 'home' %}">Back to Dashboard</a>
+    </div> 
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ customer.management_form }}
+                Name    : {{customer.name}}
+                <br>
+                <br>
+                Phone   : {{customer.phone}}
+                <br>
+                <br>
+                Email   : {{customer.email}} 
+                <br>
+                <br>
+                {{customer.profile_pic}}
+                <hr>
+                
+                <input class="btn btn-success" type="submit" value="Create Customer" name="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

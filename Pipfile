@@ -9,6 +9,9 @@ verify_ssl = true
 django = "*"
 django-filter = "*"
 pillow = "*"
+psycopg2 = "*"
+django-storages = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.7"

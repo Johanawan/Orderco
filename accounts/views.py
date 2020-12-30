@@ -36,7 +36,6 @@ def registerPage(request):
         "form": form,
     }
     return render(request, "registration/register.html", context)
-
 @unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
@@ -63,7 +62,9 @@ def logoutUser(request):
 @login_required(login_url="login")
 @admin_only
 def home(request):
+
     orders = Order.objects.all()
+    orders_featured = Order.objects.all()[:10]
     customers = Customer.objects.all()
 
     total_customers = customers.count()
@@ -74,6 +75,7 @@ def home(request):
 
     context = {
         "orders": orders,
+        "orders_featured": orders_featured,
         "customers": customers,
         "total_customers": total_customers,
         "total_orders": total_orders,
@@ -105,6 +107,9 @@ def userPage(request):
 def accountSettings(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)
+
+    if request.method == "POST":
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
     context = {
         'form': form,
     }
@@ -148,10 +153,11 @@ def createOrder(request, pk):
         formset = OrderFormSet(request.POST, instance=customer)
         if formset.is_valid():
             formset.save()
-            return redirect("/")
+            url = "/customer/" + str(pk)
+            return redirect(url)
 
     context = {
-        "formset": formset,
+        "form": formset,
     }
 
     return render(request, "accounts/order_form.html", context)
@@ -189,3 +195,38 @@ def deleteOrder(request, pk):
     }
 
     return render(request, "accounts/delete.html", context)
+
+def createCustomer(request):
+    customer = CustomerForm()
+
+    if request.method == "POST":
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+
+    context = {
+        'customer':customer,
+    }
+    return render(request, "accounts/create_customer.html", context)
+
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['admin'])
+def updateCustomer(request, pk):
+
+    customer = Customer.objects.get(id=pk)
+    form = CustomerForm(instance=customer)
+    
+    if request.method == "POST":
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            url = "/customer/" + str(pk)
+            return redirect(url)
+
+    context = {
+        "form": form,
+        "customer": customer,
+    }
+
+    return render(request, "accounts/update_customer.html", context)

@@ -19,13 +19,13 @@ class Tag(models.Model):
         return self.name
 
 class Product(models.Model):
-    CATEGORY = (
-        ("Indoor", "Indoor"),
-        ("Outdoor", "Outdoor"),
+    EAT_OPTION = (
+        ("Collection", "Collection"),
+        ("Delivery", "Delivery"),
     )
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(max_length=200)
-    category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    eating_option = models.CharField(max_length=200, null=True, choices=EAT_OPTION)
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     tag = models.ManyToManyField(Tag)
