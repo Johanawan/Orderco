@@ -64,14 +64,27 @@ def logoutUser(request):
 def home(request):
 
     orders = Order.objects.all()
+    
+    
+    # Lists last 10 orders.
     orders_featured = Order.objects.all()[:10]
-    customers = Customer.objects.all()
 
+    # Lists all customers
+    customers = Customer.objects.all()
     total_customers = customers.count()
 
     total_orders = orders.count()
     delivered = orders.filter(order_status='Delivered').count()
     pending = orders.filter(order_status='Pending').count()
+
+    # Calculates the total revenue card on the dashboard.
+    prices = []
+
+    for price in orders:
+        prices.append(price.product.price)
+    
+    total_revenue = sum(prices)
+    
 
     context = {
         "orders": orders,
@@ -81,6 +94,7 @@ def home(request):
         "total_orders": total_orders,
         "delivered": delivered,
         "pending": pending,
+        'total_revenue': total_revenue,
     }
 
     return render(request, "accounts/dashboard.html", context)

@@ -84,9 +84,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dbCRM',
-        "USER": "JohanTech",
+        "USER": "postgres",
         "PASSWORD": "Parad1sesurvive",
-        "HOST": "database-1.civmbefeytuf.eu-west-2.rds.amazonaws.com",
+        "HOST": "localhost",
         "PORT": 5432,
     }
 }
