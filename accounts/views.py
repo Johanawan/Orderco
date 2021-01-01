@@ -36,6 +36,7 @@ def registerPage(request):
         "form": form,
     }
     return render(request, "registration/register.html", context)
+
 @unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
@@ -60,7 +61,7 @@ def logoutUser(request):
     return redirect("home")
 
 @login_required(login_url="login")
-@admin_only
+#@admin_only
 def home(request):
 
     orders = Order.objects.all()
@@ -130,13 +131,13 @@ def accountSettings(request):
     return render(request, "accounts/account_settings.html", context)
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def products(request):
     products = Product.objects.all()
     return render(request, "accounts/products.html", {"products": products})
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
     orders = customer.order_set.all()
@@ -155,7 +156,7 @@ def customer(request, pk):
     return render(request, "accounts/customer.html", context)
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'order_status'), extra=10)
     customer = Customer.objects.get(id=pk)
@@ -177,7 +178,7 @@ def createOrder(request, pk):
     return render(request, "accounts/order_form.html", context)
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def updateOrder(request, pk):
 
     order = Order.objects.get(id=pk)
@@ -196,7 +197,7 @@ def updateOrder(request, pk):
     return render(request, "accounts/order_form.html", context)
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def deleteOrder(request, pk):
 
     order = Order.objects.get(id=pk)
@@ -210,6 +211,8 @@ def deleteOrder(request, pk):
 
     return render(request, "accounts/delete.html", context)
 
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['admin', 'customer'])
 def createCustomer(request):
     customer = CustomerForm()
 
@@ -225,7 +228,7 @@ def createCustomer(request):
     return render(request, "accounts/create_customer.html", context)
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin','customer'])
 def updateCustomer(request, pk):
 
     customer = Customer.objects.get(id=pk)
