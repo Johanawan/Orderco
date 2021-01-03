@@ -11,16 +11,20 @@ What I learnt:
 - Displaying objects onto the frontend
 - CRUD (create, retrieve, update, delete) functions in Django
 - Connecting PostgreSQL to database
-- More confidence in full-stack developing.
+- More confidence in building a simple full-stack web app.
 
 What I am still stuck on:
-- Serving media files in Django on a hosted site (I can do it when it was on my localhost *seekadvice)
+- Serving media files in Django on HEROKU (I can do it when it was on my localhost)
+
 
 Orderco Dashboard
+
 ![Image of Dashboard](https://github.com/Johanawan/Orderco/blob/main/imgs/Orderco.JPG)
 
 Orderco Customer View
+
 ![Image of Customer](https://github.com/Johanawan/Orderco/blob/main/imgs/Orderco2.JPG)
 
 Orderco Registration
+
 ![Image of Registration](https://github.com/Johanawan/Orderco/blob/main/imgs/Orderco3.JPG)
