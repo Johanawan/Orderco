@@ -17,16 +17,10 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ customer.management_form }}
-                Name    : {{customer.name}}
-                <br>
-                <br>
-                Phone   : {{customer.phone}}
-                <br>
-                <br>
-                Email   : {{customer.email}} 
-                <br>
-                <br>
-                {{customer.profile_pic}}
+                <p>Name    : {{customer.name}}</p>
+                <p>Phone   : {{customer.phone}}</p>
+                <p>Email   : {{customer.email}}</p> 
+                <p>{{customer.profile_pic}}</p>
                 <hr>
                 
                 <input class="btn btn-success" type="submit" value="Create Customer" name="Submit">

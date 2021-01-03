@@ -10,13 +10,13 @@ class Customer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Tag(models.Model):
     name = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Product(models.Model):
     EAT_OPTION = (
@@ -32,7 +32,7 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Order(models.Model):
     ORDER_STATUS = (
@@ -48,5 +48,5 @@ class Order(models.Model):
     note = models.CharField(max_length=1000, null=True, choices=ORDER_STATUS)
 
     def __str__(self):
-        return self.product.name
+        return str(self.product.name)
 

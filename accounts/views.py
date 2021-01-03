@@ -68,7 +68,7 @@ def home(request):
     
     
     # Lists last 10 orders.
-    orders_featured = Order.objects.all()[:10]
+    orders_featured = Order.objects.all().order_by('-date_created')[:10]
 
     # Lists all customers
     customers = Customer.objects.all()
