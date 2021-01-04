@@ -25,6 +25,6 @@ Orderco Customer View
 
 ![Image of Customer](https://github.com/Johanawan/Orderco/blob/main/imgs/Orderco2.JPG)
 
-Orderco Registration
+Orderco Login Form
 
 ![Image of Registration](https://github.com/Johanawan/Orderco/blob/main/imgs/Orderco3.JPG)
